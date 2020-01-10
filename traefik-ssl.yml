@@ -4,8 +4,9 @@ services:
   traefik:
     image: traefik:${VERSION:-v1.7.20-alpine}
     ports:
-      - 80:80
-      - 443:443
+      - 40480:80
+      - 40443:443
+      - 48080:8080
     command:
       # - --debug
       # - --loglevel=INFO
