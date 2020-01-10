@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   nginx:
@@ -11,10 +11,10 @@ services:
         cp /etc/nginx/nginx-onlyoffice.conf /etc/nginx/nginx.conf
         sed -i -e 's/app:9000/nextcloud_app:9000/g' /etc/nginx/nginx.conf
         nginx -g 'daemon off;'
-        
-# sed -i -e 's/app:9000/'$$STACK_NAME'_app:9000/g' /etc/nginx/nginx.conf
-# environment:
-#   - STACK_NAME={{ index .Service.Labels "com.docker.stack.namespace" }}
+
+    # sed -i -e 's/app:9000/'$$STACK_NAME'_app:9000/g' /etc/nginx/nginx.conf
+    # environment:
+    #   - STACK_NAME={{ index .Service.Labels "com.docker.stack.namespace" }}
     volumes:
       - ${VOLUME_PATH}nextcloud:/var/www/html:cached
     deploy:
@@ -38,10 +38,10 @@ services:
       - |
         sleep 10
         apk add --no-cache sudo
-		sudo -u www-data php occ --no-warnings config:system:set trusted_domains 0 --value="nginx"
-		sudo -u www-data php occ --no-warnings config:system:set trusted_domains 1 --value="traefik"
-		sudo -u www-data php occ --no-warnings config:system:set trusted_domains 2 --value="cloud.adrw.xyz"
-		sudo -u www-data php occ --no-warnings config:system:set trusted_domains 3 --value="localhost"
+        sudo -u www-data php occ --no-warnings config:system:set trusted_domains 0 --value="nginx"
+        sudo -u www-data php occ --no-warnings config:system:set trusted_domains 1 --value="traefik"
+        sudo -u www-data php occ --no-warnings config:system:set trusted_domains 2 --value="cloud.adrw.xyz"
+        sudo -u www-data php occ --no-warnings config:system:set trusted_domains 3 --value="localhost"
         sudo -u www-data php occ --no-warnings app:install onlyoffice
         sudo -u www-data php occ --no-warnings config:system:set onlyoffice DocumentServerUrl --value="/ds-vpath/"
         sudo -u www-data php occ --no-warnings config:system:set onlyoffice DocumentServerInternalUrl --value="http://onlyoffice/"
