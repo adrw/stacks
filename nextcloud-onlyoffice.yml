@@ -76,6 +76,7 @@ services:
 
   onlyoffice:
     image: onlyoffice/documentserver:5.4.2.46
+    container_name: onlyoffice
     networks:
       - internal
 
